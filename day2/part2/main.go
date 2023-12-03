@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/adampresley/advent2023/pkg/fileutils"
+	"github.com/adampresley/advent2023/pkg/sorting"
 )
 
 const (
@@ -174,21 +175,9 @@ func getMinimumSet(rounds []Round) Round {
 		blues = append(blues, round.Blue)
 	}
 
-	reverseSort := func(a, b int) int {
-		if a < b {
-			return 1
-		}
-
-		if a > b {
-			return -1
-		}
-
-		return 0
-	}
-
-	slices.SortFunc(reds, reverseSort)
-	slices.SortFunc(greens, reverseSort)
-	slices.SortFunc(blues, reverseSort)
+	slices.SortFunc(reds, sorting.IntReverse)
+	slices.SortFunc(greens, sorting.IntReverse)
+	slices.SortFunc(blues, sorting.IntReverse)
 
 	return Round{
 		Red:   reds[0],
